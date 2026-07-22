@@ -82,6 +82,15 @@ public class Produto {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
+
+	public Produto getCategoria() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public void setCategoria(Categoria categoria) {
+	    this.categoria = categoria;
+	}
 	
 	
 	
