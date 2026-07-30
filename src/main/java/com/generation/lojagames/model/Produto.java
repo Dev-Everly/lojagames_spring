@@ -13,10 +13,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -28,12 +28,12 @@ public class Produto {
 	private Long id;
 	
 	@NotBlank
-	@Size(max = 255, message = "O atributo nome não pode ser vazio !")
+	@Size(min = 3,max = 255, message = "O atributo nome não pode ser vazio !")
 	@Column(length = 255)
 	private String nome;
 	
 	@NotNull(message = "O preço é obrigatório")
-	@PositiveOrZero(message = "O preço não pode ser negativo")
+	@DecimalMin(value = "0.01")
 	@Column(name = "preco", nullable = false, precision = 10, scale = 2)
 	private BigDecimal preco;
 
@@ -43,6 +43,7 @@ public class Produto {
 	    flags = Pattern.Flag.CASE_INSENSITIVE, 
 	    message = "A URL deve apontar para uma imagem válida (jpg, png, webp, etc.)" // Regex garante que termine com extensão de imagem conhecida
 	)
+	@Size(max = 500, message = "O link da foto não pode ser maior do que 500 caracteres.")
 	@Column(length = 500)
 	private String foto;
 
